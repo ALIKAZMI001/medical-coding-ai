@@ -12,7 +12,7 @@ Takes a clinical record (PDF or text) and produces the **CPT/HCPCS** procedure c
 
 ```mermaid
 flowchart TD
-    A["<b>Medical record</b><br/>PDF / text"] --> B["<b>Extraction</b><br/>find procedures & diagnoses,<br/>redact personal info"]
+    A["<b>Medical record</b><br/>PDF / text"] --> B["<b>Extraction (LLM)</b><br/>LLM extracts procedure descriptions<br/>and diagnosis descriptions,<br/>redact personal info"]
     B --> C["<b>CPT / HCPCS prediction</b><br/>code + modifiers<br/>(rule-first modifier engine)"]
     C --> D["<b>ICD-10-CM prediction</b><br/>retrieval (vector + keyword search) + LLM"]
     D --> E["<b>Result per record</b>"]
@@ -21,7 +21,7 @@ flowchart TD
 
 ## How it works
 
-1. **Extraction** — identifies the procedures and diagnoses in the record and redacts personal information.
+1. **Extraction** — an LLM extracts the procedure descriptions and diagnosis descriptions from the record, and personal information is redacted.
 2. **CPT/HCPCS prediction** — predicts the code for each procedure and the modifiers that apply, using a rule-first modifier engine.
 3. **ICD-10-CM prediction** — finds the matching diagnosis code(s) using retrieval (vector + keyword search) combined with an LLM.
 4. **Output and evaluation** — one result per record, with an evaluation step that measures accuracy against a labelled set.
